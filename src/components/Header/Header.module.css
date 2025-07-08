@@ -1,0 +1,231 @@
+/* frontend/src/components/Header/Header.module.css */
+
+.header {
+  background-color: var(--color-white);
+  padding: 20px 0; /* Padding'i artırdık, logoya daha fazla dikey alan açtık */
+  border-bottom: 1px solid var(--color-light-gray);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a { /* motion.a için */
+  display: inline-block;
+  /* transition: transform 0.3s ease; /* Framer Motion kendi geçişini yönetir */
+}
+
+/* .logoText kaldırıldı */
+
+.logoImage { /* Yeni logo görseli için stil */
+  height: 80px; /* Logonuzun yüksekliğini daha da artırdık */
+  width: 250px; /* Orantılı genişlik */
+  display: block; /* Fazla boşlukları engellemek için */
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navLink {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-dark-gray);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+  padding-bottom: 5px;
+}
+
+.navLink:hover {
+  color: var(--color-accent-blue);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent-blue);
+  transition: width 0.3s ease-in-out;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.rightIcons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Ortak Dropdown Seçici Stilleri (Dil ve Para Birimi için) */
+.languageSelector,
+.currencySelector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: var(--color-dark-gray);
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 6px 10px;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 8px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.languageSelector:hover,
+.currencySelector:hover {
+  background-color: var(--color-off-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.currentLanguage,
+.currentCurrency {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem; /* Metin font boyutu */
+}
+
+.flagIcon {
+  width: 24px;
+  height: 18px;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.dropdownArrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
+.languageSelector:hover .dropdownArrow,
+.currencySelector:hover .dropdownArrow {
+  transform: rotate(180deg);
+}
+
+.languageDropdown,
+.currencyDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-light-gray);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 100%;
+  padding: 5px 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.dropdownItem {
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--color-dark-gray);
+}
+
+.dropdownItem:hover {
+  background-color: var(--color-off-white);
+  color: var(--color-accent-blue);
+}
+
+/* İkon Stilleri */
+.contactIcon {
+  color: var(--color-dark-gray);
+  font-size: 1.4rem;
+  background-color: var(--color-off-white);
+  padding: 7px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* WhatsApp ikonu için özel renk */
+.contactIcon:first-of-type {
+  background-color: #25D366;
+  color: var(--color-white);
+}
+
+.contactIcon:first-of-type:hover {
+  background-color: #1DA851;
+  transform: translateY(-2px);
+}
+
+/* Telefon ikonu için varsayılan hover */
+.contactIcon:nth-of-type(2):hover {
+  background-color: var(--color-accent-blue);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 0;
+  }
+  .logoImage { /* Mobil için logo boyutu */
+    height: 60px;
+  }
+  .nav {
+    display: none;
+  }
+  .rightIcons {
+    gap: 8px;
+  }
+  .contactIcon {
+    font-size: 1.1rem;
+    padding: 5px;
+  }
+  .languageSelector,
+  .currencySelector {
+    padding: 5px 7px;
+    font-size: 0.8rem;
+  }
+  .currentLanguage,
+  .currentCurrency {
+    font-size: 0.9rem;
+  }
+  .flagIcon {
+    width: 20px;
+    height: 15px;
+  }
+  .languageDropdown,
+  .currencyDropdown {
+    min-width: unset;
+  }
+  .dropdownItem {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+}
